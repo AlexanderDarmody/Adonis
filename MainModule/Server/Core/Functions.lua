@@ -330,7 +330,7 @@ return function(Vargs, GetEnv)
 					end
 				end;
 			};
-			
+
 			["+name"] = {
 				Match = "+";
 				Function = function(msg, plr, parent, players, delplayers, addplayers, randplayers, getplr, plus, isKicking, useFakePlayer, allowUnknownUsers)
@@ -349,7 +349,7 @@ return function(Vargs, GetEnv)
 					end
 				end;
 			};
-			
+
 			["#number"] = {
 				Match = "#";
 				Function = function(msg, plr, ...)
@@ -451,10 +451,10 @@ return function(Vargs, GetEnv)
 			return fakePlayer
 		end;
 
-		GetChatService = function()
+		GetChatService = function(waitTime)
 			local isTextChat = service.TextChatService.ChatVersion == Enum.ChatVersion.TextChatService
-			local chatHandler = service.ServerScriptService:WaitForChild("ChatServiceRunner", isTextChat and 0.2 or 120)
-			local chatMod = chatHandler and chatHandler:WaitForChild("ChatService", isTextChat and 0.2 or 120)
+			local chatHandler = service.ServerScriptService:WaitForChild("ChatServiceRunner", waitTime or isTextChat and 0.2 or 145)
+			local chatMod = chatHandler and chatHandler:WaitForChild("ChatService", waitTime or isTextChat and 0.2 or 145)
 
 			if chatMod then
 				return require(chatMod)
@@ -476,7 +476,7 @@ return function(Vargs, GetEnv)
 			for i, arg in args do
 				str ..= `Arg{i}: {arg}; `
 			end
-			return str:sub(1, -3)
+			return string.sub(str, 1, -3)
 		end;
 
 		GetPlayers = function(plr, argument, options)
@@ -615,7 +615,7 @@ return function(Vargs, GetEnv)
 			--// The following is intended to prevent name spamming (eg. :re scel,scel,scel,scel,scel,scel,scel,scel,scel,scel,scel,scel,scel,scel...)
 			--// It will also prevent situations where a player falls within multiple player finders (eg. :re group-1928483,nonadmins,radius-50 (one player can match all 3 of these))
 			--// Edited to adjust removals and randomizers.
-			
+
 			local filteredList = {}
 			local checkList = {}
 
